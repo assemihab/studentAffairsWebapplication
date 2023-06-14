@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Giza University</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/style.css' %}">
+  </head>
+  <body>
+    <div class="head">
+    <div class="header" style="display: block;">
+      <header>
+        <img src="{% static 'login/images/py.jpeg' %}" width="80" height="60" />
+        <a href="homepage.html" class="tile"> <center><h1>Giza University</h1></center></a>
+      </header>
+    </div>
+    <nav style="display: block;">
+      <a href="{% url 'login:log' %}">login page</a>
+    </nav>
+  </div>
+    <main>
+      <h2>Welcome to Giza University Student Affairs</h2>
+      <p>
+        Giza University is a new university in Cairo, Egypt. Founded in 2023, it
+        is the newest university in Egypt and one of the largest in the country.
+        Giza University offers a wide range of undergraduate and graduate
+        programs across various disciplines, including engineering, medicine,
+        humanities, social sciences, and more.
+      </p>
+      <p>
+        At Giza University, we are committed to providing our students with a
+        world-class education that prepares them for successful careers and
+        leadership roles in their communities and beyond.
+      </p>
+      <div class="photos">
+        <div class="photo" id="photo1">
+          <img
+            src="{% static 'login/images/photo1.jpg' %}"
+            alt="Giza University photo 1"
+            width="400"
+            height="300"
+            style="border-radius: 5px"
+          />
+          <p>
+            dersials po appectedies mistial boycher </br> geyl belginate overudes
+            chintal suzew scantivaning 
+          </p>
+        </div>
+        <div class="photo">
+          <img
+            src="{% static 'login/images/photo2.jpg' %}"
+            alt="Giza University photo 2"
+            width="400"
+            height="300"
+            style="border-radius: 5px"
+          />
+          <p>runsolincows
+            frizzonaire evocolarry willary ineling</br> foxalite budderittic hoserated planticassy baroadies </p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

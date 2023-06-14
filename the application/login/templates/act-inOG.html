@@ -1,0 +1,117 @@
+<style>
+  table {
+    border: 1px solid black;
+    height: 1000px;
+    width: 400px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 50%;
+    padding: 10px;
+  }
+
+  .row2 {
+    text-align: center;
+    display: flex;
+  }
+  .b1 {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 140; /* width of button */
+    height: 20px; /* height of button */
+  }
+
+  .b2 {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -100;
+    width: 140; /* width of button */
+    height: 20px; /* height of button */
+  }
+  h1 {
+    text-align: center;
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src=".\resources\index.js"></script>
+    <script type="module" src=".\js\search_for_students.js"></script>
+    <script type="module">
+      import { SearchFor } from "./js/search_for_students.js";
+      window.SearchFor = SearchFor;
+    </script>
+    <title>active/inactive | GU-Student Affairs</title>
+    
+  </head>
+  <body>
+    <div class="head">
+      <div class="header" style="display: block;">
+        <header>
+          <img src="./resources/py.jpeg" width="80" height="60" />
+          <a href="homepage.html" class="tile"><center><h1>Giza University</h1></center></a>
+        </header>
+      </div>
+    </div>
+    <nav>
+      <a href="userprofile.html">User Profile</a>&emsp;
+      <a href="search for student .html"> Search By Name</a>&emsp;
+      <a href="act-in.html">Active and Inactive Pages</a>&emsp;
+      <a href="addNewStudent.html">Add New Student</a>&emsp;
+      <a href="loginform.html">Log Out</a>
+    </nav>
+    <div class="row">
+      <div class="column">
+        <h3>Active</h3>
+        <form>
+          Student ID: 
+          
+          <input type="text" id="StudenIDACT" placeholder="Enter ID" />
+          
+          <button value="submit" name="active" type="button" onclick="SearchFor(this.name)">Search</button> 
+          <br />
+        </form>
+        <table border id="actTable">
+          <tr></tr>
+        </table>
+      </div>
+      <div class="column">
+        <button class="b1" type="button">Change to active</button>
+        <button class="b2" type="button">Change to inactive</button>
+      </div>
+      <div class="column">
+        <h3>Inactive</h3>
+        <form>
+          Student ID: 
+          
+          <input type="text" id="StudentIDINACT" placeholder="Enter ID" />
+          
+          <button value="submit" name="inactive" type="button" onclick="SearchFor(this.name)">Search</button> 
+          <br />
+        </form>
+        <table border id="inactTable">
+          <tr></tr>
+        </table>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

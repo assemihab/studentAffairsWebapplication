@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/css/style.css' %}"
+    />
+    <!-- <script type="module" src="{% static 'login/js/index.js' %}"></script>
+    <script
+      type="module"
+      src="{% static 'login/js/search_for_students.js' %}"
+    ></script>
+    <script type="module">
+      import { SearchFor } from "./static/js/search_for_students.js";
+      import { sendData } from "./static/js/search_for_students.js";
+      window.SearchFor = SearchFor;
+      window.sendData = sendData;
+    </script> -->
+    <title>Search for student</title>
+  </head>
+  <body>
+    <header>
+      <div class="head">
+        <div class="header" style="display: block">
+          <header>
+            <img
+              src="{% static 'login/images/py.jpeg' %}"
+              width="80"
+              height="60"
+            />
+            <a href="homepage.html" class="tile"
+              ><center><h1>Giza University</h1></center></a
+            >
+          </header>
+        </div>
+      </div>
+
+      <nav>
+        <a href="userprofile.html">User Profile</a>&emsp;
+        <!-- <a href="search for student .html"> Search By Name</a>&emsp; -->
+        <a href="{% url 'login:searchin' %}"> Search By Name</a>&emsp;
+
+        <a href="{% url 'login:actinact' %}">Active and Inactive Pages</a>&emsp;
+        <a href="{% url 'login:addnew' %}">Add New Student</a>&emsp;
+        <a href="{% url 'login:log' %}">Log Out</a>
+      </nav>
+      <h1>Search for Student</h1>
+      <hr />
+    </header>
+    <form name="srchFrm">
+      Student Name: <br />
+      <br />
+      <input type="text" id="StudentName" placeholder="Enter name" /><br />
+      <br />
+      <button value="submit" type="button" onclick="SearchFor()">Search</button>
+      <br />
+      <br />
+    </form>
+    <table border id="stdTable">
+      <tr>
+        <th><a>Name</a></th>
+        <th>ID</th>
+        <th>Year</th>
+        <th>edit</th>
+        <th>assign department</th>
+      </tr>
+    </table>
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+    <script>
+      function SearchFor() {
+        var xhttp = new XMLHttpRequest();
+        var studentName = document.getElementById("StudentName").value;
+
+        xhttp.onload = function () {
+          var response = JSON.parse(this.responseText);
+          resp = JSON.parse(response);
+          console.log(resp[0].fields);
+          id = resp[0].fields.student_id;
+          name = resp[0].fields.student_name;
+          Year = resp[0].fields.student_year_of_education;
+
+          var table = document.getElementById("stdTable");
+          var row = table.insertRow(-1);
+
+          var nameCell = row.insertCell(0);
+          nameCell.textContent = name;
+
+          var idCell = row.insertCell(1);
+          idCell.textContent = id;
+
+          var yearCell = row.insertCell(2);
+          yearCell.textContent = Year;
+
+          var editCell = row.insertCell(3);
+          var editButton = document.createElement("button");
+          editButton.textContent = "Edit";
+          editButton.addEventListener("click", function () {
+            window.location.href = "/updateStudent.html?id=" + id;
+          });
+          editCell.appendChild(editButton);
+
+          var assignCell = row.insertCell(4);
+          var assignButton = document.createElement("button");
+          assignButton.textContent = "Assign Department";
+          assignButton.addEventListener("click", function () {
+            window.location.href = "/department-form.html?id=" + id;
+          });
+          assignCell.appendChild(assignButton);
+        };
+
+        xhttp.open("POST", "/searchstud/");
+        xhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xhttp.send("student_name=" + encodeURIComponent(studentName));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+{% load static %}
+<style>
+  table {
+    border: 1px solid black;
+    height: 1000px;
+    width: 400px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 50%;
+    padding: 10px;
+  }
+
+  .row2 {
+    text-align: center;
+    display: flex;
+  }
+  .b1 {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 140; /* width of button */
+    height: 20px; /* height of button */
+  }
+
+  .b2 {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -100;
+    width: 140; /* width of button */
+    height: 20px; /* height of button */
+  }
+  h1 {
+    text-align: center;
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/css/style.css' %}"
+    />
+    <script type="module" src=".\resources\index.js"></script>
+    <script type="module" src=".\js\search_for_students.js"></script>
+    <script type="module">
+      import { SearchFor } from "./js/search_for_students.js";
+      import { change } from "./js/search_for_students.js";
+      window.SearchFor = SearchFor;
+      window.change = change;
+    </script>
+    <title>active/inactive | GU-Student Affairs</title>
+  </head>
+  <body>
+    <div class="head">
+      <div class="header" style="display: block">
+        <header>
+          <img
+            src="{% static 'login/images/py.jpeg' %}"
+            width="80"
+            height="60"
+          />
+          <a href="homepage.html" class="tile"
+            ><center><h1>Giza University</h1></center></a
+          >
+        </header>
+      </div>
+    </div>
+    <nav>
+      <a href="userprofile.html">User Profile</a>&emsp;
+      <!-- <a href="search for student .html"> Search By Name</a>&emsp; -->
+      <a href="{% url 'login:searchin' %}"> Search By Name</a>&emsp;
+
+      <a href="{% url 'login:actinact' %}">Active and Inactive Pages</a>&emsp;
+      <a href="{% url 'login:addnew' %}">Add New Student</a>&emsp;
+      <a href="{% url 'login:log' %}">Log Out</a>
+    </nav>
+    <div class="row">
+      <div class="column">
+        <h3>Active</h3>
+        <table border id="actTable">
+          {% for student in studentslist %}
+          <tr>
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.student_name }}</td>
+            <td>{{ student.student_gpa }}</td>
+            <td>{{ student.student_status }}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+      <div class="column">
+        <button
+          class="b1"
+          type="button"
+          name="active"
+          onclick="change(this.name)"
+        >
+          Change to active
+        </button>
+        <button
+          class="b2"
+          type="button"
+          name="inactive"
+          onclick="change(this.name)"
+        >
+          Change to inactive
+        </button>
+      </div>
+      <div class="column">
+        <h3>Inactive</h3>
+        <table border id="inactTable">
+          <tr>
+            {% for student in inactive %}
+            <tr>
+              <td>{{ student.student_id }}</td>
+              <td>{{ student.student_name }}</td>
+              <td>{{ student.student_gpa }}</td>
+              <td>{{ student.student_status }}</td>
+            </tr>
+            {%endfor%}
+          </tr>
+        </table>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

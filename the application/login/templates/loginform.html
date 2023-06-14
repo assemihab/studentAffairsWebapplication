@@ -1,0 +1,54 @@
+<!--add new student page-->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/css/style.css' %}"
+    />
+    <script type="module" src="{% static 'login/js/index.js' %}"></script>
+    <script type="module" src="{% static 'login/js/login_form.js' %}"></script>
+    <script type="module">
+      import { auth } from ".static/login/js/login_form.js";
+      window.auth = auth;
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="head">
+        <div class="header" style="display: block">
+          <header>
+            <img
+              src="{% static 'login/images/py.jpeg' %}"
+              width="80"
+              height="60"
+            />
+            <a href="homepage.html" class="tile"
+              ><center><h1>Giza University</h1></center></a
+            >
+          </header>
+        </div>
+      </div>
+      <nav>
+        <a href="{% url 'login:homepage' %}" class="navbuttons">Home</a>
+      </nav>
+      <h1>Login</h1>
+      <hr />
+    </header>
+    <main>
+      <form action="/submit/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Submit</button>
+      </form>
+    </main>
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Department Assignment</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src=".\resources\index.js"></script>
+    <script type="module" src=".\js\department_form.js"></script>
+    <script type="module">
+      import { assign } from "./js/department_form.js";
+      window.assign = assign;
+    </script> 
+  </head>
+  <body>
+    <header>
+      <div class="head">
+        <div class="header" style="display: block;">
+          <header>
+            <img src=".\resources\py.jpeg" width="80" height="60" />
+            <a href="homepage.html" class="tile"><center><h1>Giza University</h1></center></a>
+          </header>
+        </div>
+      </div>
+      
+      <nav>
+        <a href="userprofile.html">User Profile</a>&emsp;
+        <a href="search for student .html"> Search By Name</a>&emsp;
+        <a href="act-in.html">Active and Inactive Pages</a>&emsp;
+        <a href="addNewStudent.html">Add New Student</a>&emsp;
+        <a href="loginform.html">Log Out</a>
+      </nav>
+      <h1>User Profile</h1>
+      <hr>
+    </header>
+    <h1>Student Information</h1>
+    <h2 id="stName">Name1</h2>
+    <h2 id="stID">20200001</h2>
+    <h2 id="stYr">Year 2</h2>
+    <label for="Department"> Assign Department: </label>
+    <select name="Department" id="Department">
+      <option value=""></option>
+      <option value="IS">Information System</option>
+      <option value="DS">Data Science</option>
+      <option value="CS">Computer Science</option>
+      <option value="AI">Artficial Intelligence</option>
+    </select>
+    <button value="submit" type="button" onclick="return assign()">Assign</button> <br />
+    <br />
+    <footer>
+      <p>&copy; Giza University, 2023. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
