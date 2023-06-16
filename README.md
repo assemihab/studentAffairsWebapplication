@@ -9,10 +9,10 @@ The second page is just a home page. We used some pictures from the internet for
 
 ![image](https://github.com/assemihab/studentAffairs/assets/87605812/fe315604-9a91-434a-9799-2520e550c617)
  
-To add a new user, use the following credentials:
+To add a new user, This should be done directly through the model. use the following credentials right now:
 Username: Assem Ihab
 Password: assem900
-This should be done directly through the model.
+
 ![image](https://github.com/assemihab/studentAffairs/assets/87605812/f613155f-2f46-4ddd-a76f-37f2edf9238c)
 
 
