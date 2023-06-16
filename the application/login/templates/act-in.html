@@ -1,5 +1,5 @@
 {% load static %}
-<style>
+<!-- <style>
   table {
     border: 1px solid black;
     height: 1000px;
@@ -43,11 +43,33 @@
   h1 {
     text-align: center;
   }
-</style>
+</style> -->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      #actTable,
+      #inactTable {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      #actTable td,
+      #inactTable td {
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+
+      #actTable th,
+      #inactTable th {
+        padding: 8px;
+        border: 1px solid #ddd;
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+    </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -82,7 +104,6 @@
       </div>
     </div>
     <nav>
-      <a href="userprofile.html">User Profile</a>&emsp;
       <!-- <a href="search for student .html"> Search By Name</a>&emsp; -->
       <a href="{% url 'login:searchin' %}"> Search By Name</a>&emsp;
 
@@ -94,8 +115,18 @@
       <div class="column">
         <h3>Active</h3>
         <table border id="actTable">
+          <tr>
+            <th></th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student GPA</th>
+            <th>Student Status</th>
+          </tr>
           {% for student in studentslist %}
           <tr>
+            <td>
+              <input name="activeR" type="radio" id="{{student.student_id }}" />
+            </td>
             <td>{{ student.student_id }}</td>
             <td>{{ student.student_name }}</td>
             <td>{{ student.student_gpa }}</td>
@@ -126,20 +157,92 @@
         <h3>Inactive</h3>
         <table border id="inactTable">
           <tr>
-            {% for student in inactive %}
-            <tr>
-              <td>{{ student.student_id }}</td>
-              <td>{{ student.student_name }}</td>
-              <td>{{ student.student_gpa }}</td>
-              <td>{{ student.student_status }}</td>
-            </tr>
-            {%endfor%}
+            <th></th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student GPA</th>
+            <th>Student Status</th>
           </tr>
+          {% for student in inactive %}
+          <tr>
+            <td>
+              <input
+                name="inactiveR"
+                type="radio"
+                id="{{student.student_id }}"
+              />
+            </td>
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.student_name }}</td>
+            <td>{{ student.student_gpa }}</td>
+            <td>{{ student.student_status }}</td>
+          </tr>
+          {%endfor%}
         </table>
       </div>
     </div>
     <footer>
       <p>&copy; Giza University, 2023. All rights reserved.</p>
     </footer>
+    <script>
+      function change(btnName) {
+        if (btnName == "inactive") {
+          var radio = Array.from(document.getElementsByName("activeR"));
+          radio = radio.filter((child) => child.checked)[0];
+          studentid = radio.id;
+          studentStatus = "active";
+          // console.log(studentid);
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+              var response = this.responseText;
+              // resp = JSON.parse(response);
+            }
+          };
+          xhttp.open("POST", "/change_toact/");
+          xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
+          var params =
+            "student_id=" +
+            encodeURIComponent(studentid) +
+            "&student_status=" +
+            encodeURIComponent(studentStatus);
+
+          xhttp.send(params);
+        } else {
+          var radio = Array.from(document.getElementsByName("inactiveR"));
+          radio = radio.filter((child) => child.checked)[0];
+          studentid = radio.id;
+          studentStatus = "inactive";
+          // console.log(studentid);
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+              var response = this.responseText;
+              // resp = JSON.parse(response);
+              console.log(response);
+            }
+          };
+          xhttp.open("POST", "/change_toact/");
+          xhttp.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          );
+          var params =
+            "student_id=" +
+            encodeURIComponent(studentid) +
+            "&student_status=" +
+            encodeURIComponent(studentStatus);
+
+          xhttp.send(params);
+        }
+
+        setTimeout(function () {
+          location.reload();
+        }, 2000);
+      }
+    </script>
   </body>
 </html>
