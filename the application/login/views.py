@@ -5,6 +5,8 @@ from .models import User,Student
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 
+def userProfie(request):
+    return render(request, 'userprofile.html')
 def index(request):
     return render(request, 'home.html')
 
@@ -38,10 +40,10 @@ def search(request):
 def searchStudent(request):
     if request.method == 'POST':
         student_name = request.POST.get('student_name')
-        student = Student.objects.filter(student_name=student_name).first()
+        student = Student.objects.filter(student_name=student_name)
         #revise on this part
         if student:
-            serialized_student = serializers.serialize('json', [student])
+            serialized_student = serializers.serialize('json', student)
             return JsonResponse(serialized_student, safe=False)
         else:
             return JsonResponse({}, safe=False)
@@ -105,13 +107,94 @@ def update_student(request):
         
     }
     return render(request, 'updateStudent.html',studentdatadict)
+# student_name = request.POST.get('student_name')
+@csrf_exempt
+def editstud(request):
+    if request.method == 'POST':
+        # serialized_student = serializers.serialize('json', ["test"])
+        # return render(request, 'response.html', {'message': 'studentId'})
+        method=request.POST.get('method')
+        if(method=='edit'):
+            studentId=request.POST.get('student_id')
+            studentName=request.POST.get('new_name')
+            studentgpa=request.POST.get('new_gpa')
+            studentDep=request.POST.get('new_department')
+            student=Student.objects.filter(student_id=studentId)
+            # serialized_student = serializers.serialize('json', [student])
+            # return JsonResponse(serialized_student, safe=False)
+            
+            x=student[0]
+            x.student_name=studentName
+            x.student_department=studentDep
+            x.student_gpa=studentgpa
+            x.save()
+            return JsonResponse('updated', safe=False)
+        else:
+            studentid=request.POST.get('student_id')
+            student=Student.objects.filter(student_id=studentid)
+            x=student[0]
+            x.delete()
+            return JsonResponse('deleted', safe=False)
+    else:
+        return render(request, 'response.html', {'message': 'bad update method!'})
+        
 
 
+
+
+def editDept(request):
+    student_idd = request.GET.get('id')
+    
+
+    students=Student.objects.filter(student_id=student_idd).values()
+    student=students[0]
+    
+    studentdatadict = {
+        'student_id': student_idd,
+        'student_name':student['student_name'],
+        'student_year':student['student_year_of_education']
+    }
+    # return render(request, 'department-form.html')
+    return render(request, 'department-form.html',studentdatadict)
+
+@csrf_exempt
+
+def assigndept(request):
+    if request.method == 'POST':
+        studentId=request.POST.get('student_id')
+        studentDep=request.POST.get('new_department')
+        # return JsonResponse(studentDep, safe=False)
+        student=Student.objects.filter(student_id=studentId)
+        x=student[0]
+        x.student_department=studentDep
+        x.save()
+        return render(request, 'response.html', {'message': 'Update successful.'})
+    else:
+        return render(request, 'response.html', {'message': 'bad update method!'})
+
+@csrf_exempt
+def changestatus(request):
+    if request.method=='POST':
+            studentid=request.POST.get('student_id')
+            studentstatus=request.POST.get('student_status')
+            student=Student.objects.filter(student_id=studentid)
+            x=student[0]
+            # return JsonResponse(studentstatus, safe=False)
+            if(studentstatus=='active'):
+                x.student_status=False
+            else:
+                x.student_status=True
+            x.save()
+            return JsonResponse('updated', safe=False)
+
+            
 
 #  path('updateStudent.html', views.update_student, name='update_student'),
 #     path('department-form.html', views.department_form, name='department_form'),
+#######################how to use the data base####################
+# from login.models import Student
+# students=Student.objects.filter(student_id=student_idd).values()
 
-        
 
 
         
