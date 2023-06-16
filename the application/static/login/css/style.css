@@ -1,0 +1,150 @@
+/* Body styles */
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+}
+
+/* Header styles */
+.header {
+  background-color: #363636;
+  color: #fafafa;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  /* width: 100%; */
+  margin-top: 10px;
+  border-color: #363636;
+  border-style: solid;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  /* width: 100%; */
+}
+
+.header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  text-align: center;
+  text-transform: uppercase;
+}
+nav {
+  background-color: #aaa6a6;
+  text-align: center;
+  padding: 10px;
+  border-style: solid;
+  border-color: #aaa6a6;
+}
+
+nav a {
+  color: #fafafa;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 2px solid #fafafa;
+
+  border-radius: 30px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  background-color: #fafafa;
+  color: #1d1d1d;
+}
+
+/* Main styles */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+main h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+main p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Footer styles */
+footer {
+  background-color: #363636;
+  color: #fafafa;
+  padding: 20px;
+  text-align: center;
+  border: #f2f2f2;
+  border-style: solid;
+  padding: 30px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+footer p {
+  font-size: 14px;
+}
+.photos .photo {
+  display: inline-block;
+}
+#photo1 {
+  margin-right: 120px;
+}
+.tile {
+  color: floralwhite;
+  text-decoration: none;
+}
+.header {
+  display: block;
+}
+
+form {
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+#department-section {
+  display: none;
+}
+button {
+  background-color: #888;
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+}
